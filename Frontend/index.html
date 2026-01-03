@@ -1,1 +1,198 @@
-<!doctype html><html><body><div id='root'></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinWiz – Finance & Innovation Club | NIT Warangal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 3D Background Elements -->
+    <div class="bg-3d-container">
+        <div class="floating-element element-1"></div>
+        <div class="floating-element element-2"></div>
+        <div class="floating-element element-3"></div>
+        <div class="floating-element element-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <svg class="logo-svg" viewBox="0 0 100 100" width="40" height="40">
+                    <!-- Bull silhouette style -->
+                    <path d="M20,50 L30,40 L35,35 L45,30 L55,32 L60,40 L65,45 L70,50 L75,55 L70,60 L65,55 L60,60 L55,65 L45,70 L35,68 L30,65 L25,60 Z" fill="url(#bullGradient)" stroke="none"/>
+                    <defs>
+                        <linearGradient id="bullGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF006E;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B00FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">FINWIZ</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" data-page="home" class="nav-link active">HOME</a></li>
+                <li><a href="#" data-page="team" class="nav-link">TEAM</a></li>
+                <li><a href="#" data-page="events" class="nav-link">EVENTS</a></li>
+                <li><a href="#" data-page="gallery" class="nav-link">GALLERY</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page-section active">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-3d" id="hero3D">
+                <div class="hero-3d-inner"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-subtitle glitch" data-text="FINANCE • MARKETS • INNOVATION">FINANCE • MARKETS • INNOVATION</div>
+                <h1 class="hero-title neon-text">
+                    <span class="title-word" data-word="F">F</span>
+                    <span class="title-word" data-word="I">I</span>
+                    <span class="title-word" data-word="N">N</span>
+                    <span class="title-word" data-word="W">W</span>
+                    <span class="title-word" data-word="I">I</span>
+                    <span class="title-word" data-word="Z">Z</span>
+                </h1>
+                <p>Finance - Finance Club at NIT Warangal</p>
+                <p class="hero-desc">Building tomorrow's financial leaders and innovators through knowledge, networking, and real-world experience.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary glowing-btn" id="scrollMissionBtn">Our Mission</button>
+                    <button class="btn btn-secondary" data-page="events">Explore Events</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section id="mission-section" class="mission parallax-section">
+            <div class="section">
+                <h2 class="section-title gradient-text">Our Mission</h2>
+                <div class="mission-grid">
+                    <div class="mission-text">
+                        <h3>Who We Are</h3>
+                        <p>FinWiz is the official Finance & Innovation Club of NIT Warangal, dedicated to fostering financial literacy, investment acumen, and entrepreneurial spirit among students. We bridge the gap between academic knowledge and industry practice through curated talks, workshops, and collaborative projects.</p>
+                        <p>Our community comprises passionate students, alumni mentors, and industry professionals committed to building the next generation of financial innovators.</p>
+                    </div>
+                    <div class="mission-values">
+                        <div class="value-item card-3d">
+                            <h4>Excellence</h4>
+                            <p>We strive for the highest standards in financial education and professional development.</p>
+                        </div>
+                        <div class="value-item card-3d">
+                            <h4>Innovation</h4>
+                            <p>We explore cutting-edge fintech, investment strategies, and market insights.</p>
+                        </div>
+                        <div class="value-item card-3d">
+                            <h4>Collaboration</h4>
+                            <p>We foster peer learning, mentorship, and meaningful professional networks.</p>
+                        </div>
+                        <div class="value-item card-3d">
+                            <h4>Impact</h4>
+                            <p>We create real-world opportunities through internships, projects, and industry connections.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="benefits parallax-section">
+            <div class="section">
+                <h2 class="section-title gradient-text">What's In It For You?</h2>
+                <div class="benefits-grid" id="benefitsGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- TEAM PAGE -->
+    <div id="team-page" class="page-section">
+        <section class="team-section">
+            <div class="section-container">
+                <h2 class="section-title gradient-text">Meet The Team</h2>
+                <div class="team-hierarchy" id="teamHierarchy">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- EVENTS PAGE -->
+    <div id="events-page" class="page-section">
+        <section class="events-section">
+            <div class="section-container">
+                <h2 class="section-title gradient-text">FinTalks & Events</h2>
+                <div class="events-container" id="eventsContainer">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- GALLERY PAGE -->
+    <div id="gallery-page" class="page-section">
+        <section class="gallery-section">
+            <div class="section-container">
+                <h2 class="section-title gradient-text">Gallery</h2>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FinWiz</h3>
+                <p>Finance & Innovation Club at NIT Warangal. Building tomorrow's financial leaders through knowledge, mentorship, and real-world experience.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link" data-page="home">Home</a>
+                    <a href="#" class="footer-link" data-page="team">Team</a>
+                    <a href="#" class="footer-link" data-page="events">Events</a>
+                    <a href="#" class="footer-link" data-page="gallery">Gallery</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="footer-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Location</h3>
+                <p>NIT Warangal<br>Telangana, India<br><a href="mailto:finwiz@nitw.ac.in">finwiz@nitw.ac.in</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FinWiz – Finance & Innovation Club, NIT Warangal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
