@@ -1,3 +1,8 @@
+
+// ========================================
+// API CONFIGURATION
+// ========================================
+const API_URL = 'http://localhost:5000'; // Change to your backend URL
 const API = "http://localhost:5000";
 
 // ========================================
@@ -45,7 +50,7 @@ const teamMembers = {
             socials: { linkedin: '#', email: '#' }
         },
         {
-            name: 'Person 2 ',
+            name: 'Person 2',
             role: 'Vice President',
             socials: { linkedin: '#', email: '#' }
         }
@@ -95,39 +100,6 @@ const teamMembers = {
         }
     ]
 };
-
-const events = [
-    {
-        date: 'December 20, 2024',
-        title: 'FinTech: The Future of Finance',
-        speaker: 'Raj Patel, CEO at FinTech Innovations',
-        description: 'Explore the cutting-edge intersection of finance and technology. Learn about blockchain, AI-driven trading, and the future of digital banking. Perfect for anyone curious about the evolution of financial services.'
-    },
-    {
-        date: 'January 10, 2025',
-        title: 'Stock Market Basics: From Theory to Practice',
-        speaker: 'Meera Singh, Investment Analyst at Goldman Sachs',
-        description: 'A comprehensive walkthrough of equity markets, portfolio diversification, and risk management. Understand fundamental analysis, technical indicators, and how to build a winning investment strategy.'
-    },
-    {
-        date: 'January 25, 2025',
-        title: 'Entrepreneurship & Startup Financing',
-        speaker: 'Aryan Kapoor, Founder & Managing Partner, Venture Labs',
-        description: 'An insider\'s guide to startup funding, angel investing, and venture capital. Learn how startups raise money, understand term sheets, and explore the full ecosystem of innovation funding.'
-    },
-    {
-        date: 'February 15, 2025',
-        title: 'Cryptocurrency & Blockchain Economics',
-        speaker: 'Dr. Vikram Chopra, Crypto Strategist',
-        description: 'Deep dive into cryptography, smart contracts, and decentralized finance (DeFi). Understand the economic principles behind blockchain technology and its impact on traditional finance.'
-    },
-    {
-        date: 'March 5, 2025',
-        title: 'Corporate Finance & M&A Strategies',
-        speaker: 'Alisha Banerjee, Senior Manager at Deloitte',
-        description: 'Explore mergers and acquisitions, corporate valuation, and financing strategies. Learn how large corporations structure deals and the financial considerations behind major business transactions.'
-    }
-];
 
 const galleryItems = [
     'FinTalk Series 2024',
@@ -192,18 +164,75 @@ function renderTeam() {
     `).join('');
 }
 
-function renderEvents() {
+// Fetch and render events from backend
+async function renderEvents() {
     const container = document.getElementById('eventsContainer');
     if (!container) return;
 
-    container.innerHTML = events.map((event, index) => `
-        <div class="event-card" style="animation-delay: ${index * 100}ms">
-            <div class="event-date">${event.date}</div>
+    container.innerHTML = '<div class="loading">Loading events...</div>';
+
+    try {
+        const response = await fetch(`${API_URL}/events`);
+        const data = await response.json();
+
+        if (data.success) {
+            const allEvents = [...data.upcoming, ...data.past];
+            
+            if (allEvents.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>No events scheduled at the moment. Check back soon!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Separate upcoming and past events
+            const upcomingHTML = data.upcoming.length > 0 ? `
+                <div class="events-category">
+                    <h3 class="category-title">Upcoming Events</h3>
+                    ${data.upcoming.map((event, index) => createEventHTML(event, index)).join('')}
+                </div>
+            ` : '';
+
+            const pastHTML = data.past.length > 0 ? `
+                <div class="events-category">
+                    <h3 class="category-title">Past Events</h3>
+                    ${data.past.map((event, index) => createEventHTML(event, index, true)).join('')}
+                </div>
+            ` : '';
+
+            container.innerHTML = upcomingHTML + pastHTML;
+        } else {
+            container.innerHTML = '<div class="empty-state">Error loading events</div>';
+        }
+    } catch (error) {
+        console.error('Error fetching events:', error);
+        container.innerHTML = '<div class="empty-state">Error loading events. Please try again later.</div>';
+    }
+}
+
+function createEventHTML(event, index, isPast = false) {
+    const eventDate = new Date(event.date);
+    const formattedDate = eventDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    return `
+        <div class="event-card ${isPast ? 'past-event' : ''}" style="animation-delay: ${index * 100}ms">
+            <div class="event-date">${formattedDate}</div>
             <h3 class="event-title">${event.title}</h3>
-            <div class="event-speaker">Speaker: ${event.speaker}</div>
+            ${event.speaker ? `<div class="event-speaker">Speaker: ${event.speaker}</div>` : ''}
             <p class="event-description">${event.description}</p>
+            ${event.registrationLink && !isPast ? `
+                <a href="${event.registrationLink}" target="_blank" class="event-register-btn">
+                    <i class="fas fa-external-link-alt"></i> Register Now
+                </a>
+            ` : ''}
         </div>
-    `).join('');
+    `;
 }
 
 function renderGallery() {
@@ -242,6 +271,11 @@ function loadPage(pageName) {
 
     // Close mobile menu
     closeMobileMenu();
+
+    // Load events when events page is opened
+    if (pageName === 'events') {
+        renderEvents();
+    }
 }
 
 function updateNavLinks(currentPage) {
@@ -321,9 +355,12 @@ function initializeEventListeners() {
     });
 
     // Logo click to home
-    document.querySelector('.logo').addEventListener('click', () => {
-        loadPage('home');
-    });
+    const logoWrapper = document.querySelector('.logo-wrapper');
+    if (logoWrapper) {
+        logoWrapper.addEventListener('click', () => {
+            loadPage('home');
+        });
+    }
 }
 
 // ========================================
@@ -331,10 +368,9 @@ function initializeEventListeners() {
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Render dynamic content
+    // Render static content
     renderBenefits();
     renderTeam();
-    renderEvents();
     renderGallery();
 
     // Initialize event listeners

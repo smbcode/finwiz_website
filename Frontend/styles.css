@@ -763,6 +763,82 @@ button {
     .mission-grid {
         gap: 2rem;
     }
+
+    .events-category {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    color: var(--accent-primary);
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Event Registration Button */
+.event-register-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-primary);
+    color: var(--white);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    margin-top: 0.5rem;
+}
+
+.event-register-btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+/* Past Event Styling */
+.event-card.past-event {
+    opacity: 0.85;
+    border-left-color: var(--text-secondary);
+}
+
+.event-card.past-event:hover {
+    opacity: 1;
+}
+
+/* Loading and Empty States */
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments for events */
+@media (max-width: 768px) {
+    .category-title {
+        font-size: 1.5rem;
+    }
+    
+    .event-register-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+}
+=======
 }
 
 
