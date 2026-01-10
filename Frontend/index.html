@@ -34,12 +34,14 @@
                     </defs>
                 </svg>
                 <span class="logo-text">FINWIZ</span>
+                <span id="userGreeting" class="user-greeting"></span>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" data-page="home" class="nav-link active">HOME</a></li>
                 <li><a href="#" data-page="team" class="nav-link">TEAM</a></li>
                 <li><a href="#" data-page="events" class="nav-link">EVENTS</a></li>
                 <li><a href="#" data-page="gallery" class="nav-link">GALLERY</a></li>
+                <li><button id="logoutBtn" class="btn btn-secondary">Logout</button></li>
             </ul>
             <div class="nav-toggle" id="navToggle">
                 <span></span>
@@ -192,6 +194,8 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
     </div>
+
+    <script src="protect.js"></script>
 
     <script src="script.js"></script>
 </body>

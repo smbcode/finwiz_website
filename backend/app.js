@@ -9,7 +9,11 @@ const adminRoutes = require("./src/routes/admin");
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+  })
+);
 
 // Public routes
 app.use("/auth", authRoutes);

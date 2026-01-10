@@ -1,7 +1,9 @@
+
 // ========================================
 // API CONFIGURATION
 // ========================================
 const API_URL = 'http://localhost:5000'; // Change to your backend URL
+const API = "http://localhost:5000";
 
 // ========================================
 // DATA STRUCTURES
@@ -400,3 +402,40 @@ function addClassWithDelay(selector, className, delay = 0) {
         });
     }, delay);
 }
+
+// ================= LOAD USER =================
+async function loadUser() {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  try {
+    const res = await fetch(`${API}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) throw new Error("Unauthorized");
+
+    const user = await res.json();
+
+    const greeting = document.getElementById("userGreeting");
+    if (greeting && user.name) {
+      greeting.textContent = `Hi, ${user.name}`;
+    }
+  } catch (err) {
+    console.error("Failed to load user");
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+  }
+}
+
+loadUser();
+
+
+// ================= LOGOUT =================
+document.getElementById("logoutBtn")?.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
+});
+

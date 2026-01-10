@@ -63,17 +63,18 @@ router.post("/forgot-password", async (req, res) => {
   user.otpExpiry = Date.now() + 10 * 60 * 1000;
   await user.save();
 
-  
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "nandancs48@gmail.com",
-      pass: "awxvklbtrbywujlc"
-    }
-  });
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
   await transporter.sendMail({
-    from: "nandannh2@gmail.com",
+    from: `"FINWIZ" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Password Reset OTP",
     text: `Your OTP is ${otp}. It expires in 10 minutes.`

@@ -838,3 +838,98 @@ button {
 }
 
 }
+=======
+}
+
+
+
+/* ============================= */
+/* AUTH PAGES (LOGIN / SIGNUP) */
+/* ============================= */
+
+.auth-container {
+    max-width: 420px;
+    margin: 120px auto;
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    animation: fadeInUp 0.6s ease;
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.auth-container p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.auth-input {
+    position: relative;
+}
+
+.auth-input input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    padding-left: 1.2rem;
+    font-size: 0.95rem;
+    border: none;
+    border-left: 4px solid var(--border-color);
+    background: var(--bg-secondary);
+    outline: none;
+    transition: var(--transition);
+}
+
+.auth-input input:focus {
+    border-left-color: var(--accent-primary);
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.auth-input input::placeholder {
+    color: #999;
+}
+
+.auth-actions {
+    margin-top: 1rem;
+}
+
+.auth-actions button {
+    width: 100%;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.auth-links a {
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+
+.user-greeting {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent-primary);
+    margin-left: 6px;
+    opacity: 0.9;
+}
