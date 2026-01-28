@@ -439,3 +439,67 @@ document.getElementById("logoutBtn")?.addEventListener("click", () => {
   window.location.href = "login.html";
 });
 
+// ================= ADMIN ACTIONS =================
+
+// 1. Show the Add Event Form
+document.getElementById('addEventBtn')?.addEventListener('click', () => {
+    const formContainer = document.getElementById('eventFormContainer');
+    if (formContainer) {
+        formContainer.style.display = 'block';
+        document.getElementById('eventForm').reset();
+        document.getElementById('eventId').value = ''; // Clear ID for new event
+    }
+});
+
+// 2. Hide the form (For both Cancel and the "X" button)
+const hideEventForm = () => {
+    const formContainer = document.getElementById('eventFormContainer');
+    if (formContainer) {
+        formContainer.style.display = 'none';
+    }
+};
+
+document.getElementById('closeFormBtn')?.addEventListener('click', hideEventForm);
+document.getElementById('cancelFormBtn')?.addEventListener('click', hideEventForm);
+
+// 3. Handle Event Submission (The Save Button)
+document.getElementById('eventForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Use adminToken as saved in your admin-login.html
+    const adminToken = localStorage.getItem("adminToken"); 
+    
+    const eventData = {
+        title: document.getElementById('eventTitle').value,
+        date: document.getElementById('eventDate').value,
+        speaker: document.getElementById('eventSpeaker').value,
+        description: document.getElementById('eventDescription').value,
+        registrationLink: document.getElementById('eventRegLink').value,
+        status: document.getElementById('eventStatus').value
+    };
+
+    try {
+        // Path MUST include /admin to match your app.js settings
+        const res = await fetch(`${API_URL}/admin/events`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${adminToken}` // Required by your adminMiddleware
+            },
+            body: JSON.stringify(eventData)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+            alert("Event saved successfully!");
+            hideEventForm();
+            location.reload(); // Refresh to see the new event
+        } else {
+            alert("Error: " + (data.message || "Failed to save event"));
+        }
+    } catch (err) {
+        console.error("Save failed", err);
+        alert("Server error. Check if your backend is running on port 5000.");
+    }
+});

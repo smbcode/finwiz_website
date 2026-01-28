@@ -44,7 +44,7 @@ eventSchema.pre('save', function(next) {
   if (this.date < now && this.status === 'upcoming') {
     this.status = 'past';
   }
-  next();
+  // next();
 });
 
 // Method to check if event is upcoming
